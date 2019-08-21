@@ -1,0 +1,36 @@
+.app-wrapper {
+  /* используем div как сетку */
+  display: grid;
+  /* указываем размер колонок и строк */
+  grid-template-rows: 100px 1fr;
+  grid-template-columns: 2fr 10fr;
+  /* строим расположение по псевдонимам */
+  grid-template-areas:
+    "h h"
+    "n c";
+}
+
+.header {
+  /* даем псевдоним */
+  grid-area: h;
+  background-color: burlywood;
+}
+
+.header img {
+  width: 7%;
+}
+.nav {
+  /* даем псевдоним */
+  grid-area: n;
+  background-color: cadetblue;
+}
+
+.content {
+  /* даем псевдоним */
+  grid-area: c;
+  background-color: darkgray;
+}
+
+.content img {
+  width: 100%;
+}
