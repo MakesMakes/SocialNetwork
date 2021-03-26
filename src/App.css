@@ -13,5 +13,5 @@
 .app-wrapper-content {
   /* даем псевдоним */
   grid-area: c;
-  background-color: darkgray;
+  background-color: green;
 }
