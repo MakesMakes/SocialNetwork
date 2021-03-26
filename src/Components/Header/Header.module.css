@@ -1,0 +1,9 @@
+.header {
+  /* даем псевдоним */
+  grid-area: h;
+  background-color: burlywood;
+}
+
+.header img {
+  width: 7%;
+}

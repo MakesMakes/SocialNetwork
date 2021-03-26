@@ -1,0 +1,8 @@
+  .dialog a.active {
+    color: blue;
+  }
+
+  .dialog img {
+    width: 50px;
+    border-radius: 30px;
+  }

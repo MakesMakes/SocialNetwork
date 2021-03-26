@@ -10,27 +10,8 @@
     "n c";
 }
 
-.header {
-  /* даем псевдоним */
-  grid-area: h;
-  background-color: burlywood;
-}
-
-.header img {
-  width: 7%;
-}
-.nav {
-  /* даем псевдоним */
-  grid-area: n;
-  background-color: cadetblue;
-}
-
-.content {
+.app-wrapper-content {
   /* даем псевдоним */
   grid-area: c;
   background-color: darkgray;
-}
-
-.content img {
-  width: 100%;
 }

@@ -1,0 +1,15 @@
+.nav {
+  /* даем псевдоним */
+  grid-area: n;
+  background-color: cadetblue;
+  padding: 10%;
+}
+
+.item a {
+  color: white;
+  text-decoration: none;
+}
+
+.item a.active {
+  color: blue;
+}
