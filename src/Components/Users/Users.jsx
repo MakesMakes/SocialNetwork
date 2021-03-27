@@ -16,15 +16,15 @@ const Users = (props) => {
         <div>
             <div>
                 {pages.map(p => {
-                    return <span className={props.currentPage === p && styles.selectedPage}
-                        onClick={() => { props.onPageChanged(p) }}>{p}</span>
+                    return <button className={props.currentPage === p && styles.selectedPage}
+                        onClick={() => { props.onPageChanged(p) }}>{p}</button>
                 })}
             </div>
             {
-                props.users.map(u => <div key={u.id}>
+                props.users.map(u => <div className={styles.usersAva} key={u.id}>
                     <div >
                         <NavLink to={`/profile/` + u.id}>
-                        <img src={u.photos.small != null ? u.photos.small : userPhoto} className={styles.img} />
+                            <img src={u.photos.small != null ? u.photos.small : userPhoto} className={styles.img} />
                         </NavLink>
                     </div>
                     <div>

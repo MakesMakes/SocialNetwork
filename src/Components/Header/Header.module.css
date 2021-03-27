@@ -1,9 +1,12 @@
 .header {
   /* даем псевдоним */
   grid-area: h;
-  background-color: burlywood;
+  background-color: black;
+  position: sticky;
+  top: 0;
 }
 
 .header img {
-  width: 7%;
+  width: 5%;
+  margin: 10px;
 }

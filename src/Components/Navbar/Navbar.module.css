@@ -1,7 +1,7 @@
 .nav {
   /* даем псевдоним */
   grid-area: n;
-  background-color: cadetblue;
+  background-color: grey;
   padding: 10%;
 }
 
@@ -11,5 +11,5 @@
 }
 
 .item a.active {
-  color: blue;
+  color: black;
 }

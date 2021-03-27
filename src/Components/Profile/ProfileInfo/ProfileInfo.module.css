@@ -1,7 +1,15 @@
-img {
-  width: 50%;
+.loading img{
+  width: 10%;
+}
+
+.img img {
+  width: 100%;
 }
 
 .avatarDesc {
   padding: 10px;
+}
+
+.avatarDesc img {
+  width: 10%;
 }

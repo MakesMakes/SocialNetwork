@@ -4,4 +4,8 @@
 
 .selectedPage{
     font-weight: bold;
+    color:red;
+}
+.usersAva{
+    display: inline-block;
 }

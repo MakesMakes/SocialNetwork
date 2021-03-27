@@ -2,8 +2,7 @@
   /* используем div как сетку */
   display: grid;
   /* указываем размер колонок и строк */
-  grid-template-rows: 100px 1fr;
-  grid-template-columns: 2fr 10fr;
+  grid-template-columns: 1fr 11fr;
   /* строим расположение по псевдонимам */
   grid-template-areas:
     "h h"
@@ -13,5 +12,7 @@
 .app-wrapper-content {
   /* даем псевдоним */
   grid-area: c;
-  background-color: darkgray;
+  background-color: white;
+  overflow-y: scroll;
+  height: 80vh;
 }

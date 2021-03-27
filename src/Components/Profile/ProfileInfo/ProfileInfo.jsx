@@ -4,10 +4,10 @@ import loading from './../../../images/loading.gif'
 
 const ProfileInfo = (props) => {
 
-  if(!props.profile){
-    return  <div>
-    <img src={loading} />
-</div>
+  if (!props.profile) {
+    return <div className={style.loading}>
+      <img src={loading} />
+    </div>
   }
 
   return (
@@ -16,9 +16,9 @@ const ProfileInfo = (props) => {
         <img src="https://i.pinimg.com/originals/65/71/9f/65719f9e1dee16fa7ed834f30d55eece.png" />
       </div>
       <div className={style.avatarDesc}>
-        <img src={props.profile.photos.large}/>
-        Avatar + description
-        </div>
+        <img src={props.profile.photos.large} />
+        <div>Description</div>
+      </div>
     </div>
   );
 };
