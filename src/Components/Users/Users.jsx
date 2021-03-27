@@ -14,28 +14,23 @@ const Users = (props) => {
 
     return (
         <div>
-            <div>
-                {pages.map(p => {
-                    return <button className={props.currentPage === p && styles.selectedPage}
-                        onClick={() => { props.onPageChanged(p) }}>{p}</button>
-                })}
-            </div>
+            
             {
-                props.users.map(u => <div className={styles.usersAva} key={u.id}>
-                    <div >
+                props.users.map(u => <div className={styles.users} key={u.id}>
+                    <div className={styles.usersAva}>
                         <NavLink to={`/profile/` + u.id}>
                             <img src={u.photos.small != null ? u.photos.small : userPhoto} className={styles.img} />
                         </NavLink>
                     </div>
-                    <div>
+                    <div className={styles.buttonFollow}>
                         {u.follow
                             ? <button onClick={() => { props.unfollow(u.id) }}>Unfollow</button>
                             : <button onClick={() => { props.follow(u.id) }}>Follow</button>}
                     </div>
-                    <div>
+                    <div className={styles.usersName}>
                         {u.name}
                     </div>
-                    <div>
+                    <div className={styles.usersStatus}>
                         {u.status}
                     </div>
                     <div>
@@ -46,6 +41,12 @@ const Users = (props) => {
                     </div>
                 </div>)
             }
+            <div>
+                {pages.map(p => {
+                    return <button className={props.currentPage === p && styles.selectedPage}
+                        onClick={() => { props.onPageChanged(p) }}>{p}</button>
+                })}
+            </div>
         </div>
     )
 }

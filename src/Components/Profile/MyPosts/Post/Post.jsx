@@ -12,7 +12,7 @@ const Post = props => {
   return (
     <div className={style.item}>
       <img src="https://w-dog.ru/wallpapers/16/18/531657912161328.jpg" />
-      {props.message}
+      <div>{props.message}</div>
       <div>{props.likeCount} like</div>
     </div>
   );

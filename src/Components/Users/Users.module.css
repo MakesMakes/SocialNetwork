@@ -6,6 +6,8 @@
     font-weight: bold;
     color:red;
 }
-.usersAva{
+.users{
     display: inline-block;
+    text-align: center;
+    padding: 20px;
 }

@@ -1,8 +1,9 @@
 .item {
-  color: yellow;
+  color: black;
 }
 
 .item img {
+  margin: 5px;
   width: 80px;
   border-radius: 30px;
 }

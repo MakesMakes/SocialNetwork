@@ -23,7 +23,7 @@ const MyPosts = (props) => {
   }
 
   return (
-    <div>
+    <div className={style.myPosts}>
       <h2>My posts</h2>
       <div className={style.textBut}>
         <div>
