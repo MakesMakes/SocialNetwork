@@ -3,7 +3,6 @@ import style from "./ProfileInfo.module.css";
 import loading from './../../../images/loading.gif'
 
 const ProfileInfo = (props) => {
-  debugger;
 
   if (!props.profile) {
     return <div className={style.loading}>

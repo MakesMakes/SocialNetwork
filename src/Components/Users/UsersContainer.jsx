@@ -1,9 +1,13 @@
-import { connect } from "react-redux";
-import { followActionCreator, unfollowActionCreator, setUsersActionCreator, setCurrentPageActionCreator, setTotalUsersCountActionCreator, isLoadingActionCreator } from '../../Redux/usersPage_Reducer'
-import React from 'react';
-import Users from "./Users";
+import { connect } from "react-redux"
+import {
+    followThunkCreator,
+    unfollowThunkCreator,
+    getUsersThunkCreator,
+    getUsersCurrentPageThunkCreator
+} from '../../Redux/usersPage_Reducer'
+import React from 'react'
+import Users from "./Users"
 import loading from './../../images/loading.gif'
-import { getUserAPI } from './../../api/api';
 
 
 class UsersContainer extends React.Component {
@@ -14,36 +18,33 @@ class UsersContainer extends React.Component {
     // }
 
     componentDidMount() {
-        this.props.isLoadingToggle(true);
-        getUserAPI(this.props.currentPage, this.props.pageSize).then(data => {
-            this.props.isLoadingToggle(false);
-            this.props.setusers(data.items);
-            this.props.setTotalUsersCount(data.totalCount);
-        })
+        //использование thunk
+        this.props.getUsers(this.props.currentPage, this.props.pageSize)
     }
 
     onPageChanged = (pageNumber) => {
-        this.props.setCurrentPage(pageNumber);
-        this.props.isLoadingToggle(true)
-        getUserAPI(pageNumber, this.props.pageSize).then(data => {
-            this.props.isLoadingToggle(false)
-            this.props.setusers(data.items)
-        })
+        //использование thunk
+        this.props.getUsersCurrentPage(pageNumber, this.props.pageSize)
     }
 
     render() {
         return <>
-            {this.props.isLoading ?
+            {this.props.isFetching ?
                 <div>
                     <img src={loading} style={{ width: 100 }} />
                 </div> : null}
-            <Users totalUsersCount={this.props.totalUsersCount}
+
+            {/* передача данных и callbacks через props */}
+            <Users
+                totalUsersCount={this.props.totalUsersCount}
                 pageSize={this.props.pageSize}
                 currentPage={this.props.currentPage}
                 onPageChanged={this.onPageChanged}
                 users={this.props.users}
+                followingInProgress={this.props.followingInProgress}
+
                 unfollow={this.props.unfollow}
-                follow={this.props.follow} />
+                follow={this.props.follow}/>
         </>
     }
 }
@@ -54,7 +55,8 @@ let mapStateToProps = (state) => {
         totalUsersCount: state.usersPage.totalUsersCount,
         pageSize: state.usersPage.pageSize,
         currentPage: state.usersPage.currentPage,
-        isLoading: state.usersPage.isLoading
+        isFetching: state.usersPage.isFetching,
+        followingInProgress: state.usersPage.followingInProgress
     }
 }
 
@@ -84,11 +86,9 @@ let mapDispatchToProps = (dispatch) => {
 */
 
 export default connect(mapStateToProps, {
-    follow: followActionCreator, // это callback а не вызов
-    unfollow: unfollowActionCreator, // это callback а не вызов
-    setusers: setUsersActionCreator, // это callback а не вызов
-    setCurrentPage: setCurrentPageActionCreator, // это callback а не вызов
-    setTotalUsersCount: setTotalUsersCountActionCreator, // это callback а не вызов
-    isLoadingToggle: isLoadingActionCreator // это callback а не вызов
+    follow: followThunkCreator, // это callback а не вызов
+    unfollow: unfollowThunkCreator, // это callback а не вызов
+    getUsers: getUsersThunkCreator,
+    getUsersCurrentPage: getUsersCurrentPageThunkCreator
 })(UsersContainer);
 
