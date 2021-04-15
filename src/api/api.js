@@ -11,7 +11,7 @@ const instance = axios.create({
 export const usersAPI = {
 
     getProfile(userId) {
-        return instance.get(`profile/${userId}`)
+        return instance.get(`profile/${userId}`) //методы возвращают промисы
             .then(response => {
                 return response.data
             })
