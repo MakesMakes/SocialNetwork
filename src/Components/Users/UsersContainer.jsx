@@ -8,6 +8,7 @@ import {
 import React from 'react'
 import Users from "./Users"
 import loading from './../../images/loading.gif'
+import { withAuthRedirect } from './../../hoc/withAuthRedirect';
 
 
 class UsersContainer extends React.Component {
@@ -44,7 +45,7 @@ class UsersContainer extends React.Component {
                 followingInProgress={this.props.followingInProgress}
 
                 unfollow={this.props.unfollow}
-                follow={this.props.follow}/>
+                follow={this.props.follow} />
         </>
     }
 }
@@ -85,10 +86,12 @@ let mapDispatchToProps = (dispatch) => {
 }
 */
 
+let withRedirect = withAuthRedirect(UsersContainer)
+
 export default connect(mapStateToProps, {
     follow: followThunkCreator, // это callback а не вызов
     unfollow: unfollowThunkCreator, // это callback а не вызов
     getUsers: getUsersThunkCreator,
     getUsersCurrentPage: getUsersCurrentPageThunkCreator
-})(UsersContainer);
+})(withRedirect);
 
