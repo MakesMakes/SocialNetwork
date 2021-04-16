@@ -9,6 +9,7 @@ import React from 'react'
 import Users from "./Users"
 import loading from './../../images/loading.gif'
 import { withAuthRedirect } from './../../hoc/withAuthRedirect';
+import { compose } from "redux"
 
 
 class UsersContainer extends React.Component {
@@ -86,12 +87,13 @@ let mapDispatchToProps = (dispatch) => {
 }
 */
 
-let withRedirect = withAuthRedirect(UsersContainer)
-
-export default connect(mapStateToProps, {
-    follow: followThunkCreator, // это callback а не вызов
-    unfollow: unfollowThunkCreator, // это callback а не вызов
-    getUsers: getUsersThunkCreator,
-    getUsersCurrentPage: getUsersCurrentPageThunkCreator
-})(withRedirect);
+export default compose(
+    connect(mapStateToProps, {
+        follow: followThunkCreator, // это callback а не вызов
+        unfollow: unfollowThunkCreator, // это callback а не вызов
+        getUsers: getUsersThunkCreator,
+        getUsersCurrentPage: getUsersCurrentPageThunkCreator
+    }),
+    withAuthRedirect
+)(UsersContainer)
 
