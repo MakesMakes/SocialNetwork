@@ -1,6 +1,7 @@
 import React from "react";
 import style from "./ProfileInfo.module.css";
 import loading from './../../../images/loading.gif'
+import ProfileStatus from "./ProfileStatus/ProfileStatus";
 
 const ProfileInfo = (props) => {
 
@@ -20,6 +21,7 @@ const ProfileInfo = (props) => {
         <div>Name: {props.profile.fullName}</div>
         <div>Job: {props.profile.lookingForAJobDescription}</div>
       </div>
+      <ProfileStatus status='Hello'/>
     </div>
   );
 };
