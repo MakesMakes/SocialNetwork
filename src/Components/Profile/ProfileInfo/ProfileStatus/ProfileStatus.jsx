@@ -7,16 +7,17 @@ class ProfileStatus extends React.Component {
         editMode: false
     }
 
-    activateEditMode(){
+    activateEditMode=()=>{
         //правильное обновление стейта
         // setState - АССИНХРОННЫЙ (меняет стейт не сразу)
+        console.log('this-', this)
         this.setState({
             editMode: true
         })
         // this.forceUpdate(); отслеживает обновление локального стейта, но лучше её избегать
     }
 
-    deActivateEditMode(){
+    deActivateEditMode=()=>{
         this.setState({
             editMode: false
         })
@@ -27,12 +28,12 @@ class ProfileStatus extends React.Component {
             <div>
                 {!this.state.editMode &&
                     <div>
-                        <span onDoubleClick={this.activateEditMode.bind(this)}>{this.props.status}</span>
+                        <span onDoubleClick={this.activateEditMode}>{this.props.status}</span>
                     </div>
                 }
                 {this.state.editMode &&
                     <div>
-                        <input autoFocus={true} onBlur={this.deActivateEditMode.bind(this)} value={this.props.status} />
+                        <input autoFocus={true} onBlur={this.deActivateEditMode} value={this.props.status} />
                     </div>
                 }
             </div>
