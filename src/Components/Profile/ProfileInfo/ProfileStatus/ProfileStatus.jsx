@@ -4,10 +4,11 @@ import style from './ProfileStatus.module.css'
 class ProfileStatus extends React.Component {
 
     state = {
-        editMode: false
+        editMode: false,
+        status: this.props.status
     }
 
-    activateEditMode=()=>{
+    activateEditMode = () => {
         //правильное обновление стейта
         // setState - АССИНХРОННЫЙ (меняет стейт не сразу)
         console.log('this-', this)
@@ -17,10 +18,19 @@ class ProfileStatus extends React.Component {
         // this.forceUpdate(); отслеживает обновление локального стейта, но лучше её избегать
     }
 
-    deActivateEditMode=()=>{
+    deActivateEditMode = () => {
         this.setState({
             editMode: false
+        });
+        this.props.updateStatus(this.state.status)
+
+    }
+
+    onStatusChange = (e) =>{
+        this.setState({
+            status: e.currentTarget.value
         })
+        
     }
 
     render() {
@@ -28,12 +38,15 @@ class ProfileStatus extends React.Component {
             <div>
                 {!this.state.editMode &&
                     <div>
-                        <span onDoubleClick={this.activateEditMode}>{this.props.status}</span>
+                        <span onDoubleClick={this.activateEditMode}>{this.props.status || '------------'}</span>
                     </div>
                 }
                 {this.state.editMode &&
                     <div>
-                        <input autoFocus={true} onBlur={this.deActivateEditMode} value={this.props.status} />
+                        <input onChange={this.onStatusChange} 
+                        autoFocus={true} 
+                        onBlur={this.deActivateEditMode} 
+                        value={this.state.status} />
                     </div>
                 }
             </div>
