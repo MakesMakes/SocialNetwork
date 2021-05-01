@@ -56,32 +56,30 @@ const profilePageReducer = (state = initialState, action) => {
 export const addPostActionCreator = () => ({ type: 'ADD-POST' })
 export const updateNewPostTextActionCreator = (text) => ({ type: 'UPDATE-NEW-POST-TEXT', newText: text })
 export const setUserProfileActionCreator = (profile) => ({ type: 'SET_USER_PROFILE', profile })
-export const setStatusActionCreator = (status) => ({type: 'SET_STATUS', status})
+export const setStatusActionCreator = (status) => ({ type: 'SET_STATUS', status })
 
 export const setUserProfileThunkCreator = (userId) => {
     return (dispatch) => {
         profileAPI.getProfile(userId).then(data => {
             dispatch(setUserProfileActionCreator(data));
-          })
+        })
     }
 }
 
 export const getStatusThunkCreator = (userId) => {
     return (dispatch) => {
         profileAPI.getStatus(userId).then(data => {
-            
-        debugger;
             dispatch(setStatusActionCreator(data));
-          })
+        })
     }
 }
 
 export const updateStatusThunkCreator = (status) => {
     return (dispatch) => {
         profileAPI.updateStatus(status).then(data => {
-            if(data.resultCode === 0)
-            dispatch(setStatusActionCreator(status));
-          })
+            if (data.resultCode === 0)
+                dispatch(setStatusActionCreator(status));
+        })
     }
 }
 
