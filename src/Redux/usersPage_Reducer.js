@@ -65,7 +65,7 @@ const usersPageReducer = (state = initialState, action) => {
                 ...state,
                 followingInProgress: action.isFetching
                     ? [...state.followingInProgress, action.userId]
-                    : state.followingInProgress.filter(id => id != action.userId)
+                    : state.followingInProgress.filter(id => id !== action.userId)
                 //filter возвращает новый массив => копия (деструктуризация не нужна)
             }
         default:
@@ -116,7 +116,7 @@ export const unfollowThunkCreator = (userId) => {
         dispatch(toggleFollowingProgressActionCreator(true, userId));
 
         usersAPI.unfollow(userId).then(data => {
-            if (data.resultCode == 0) {
+            if (data.resultCode === 0) {
                 dispatch(unfollowActionCreator(userId));
             }
 
@@ -130,7 +130,7 @@ export const followThunkCreator = (userId) => {
         dispatch(toggleFollowingProgressActionCreator(true, userId));
 
         usersAPI.follow(userId).then(data => {
-            if (data.resultCode == 0) {
+            if (data.resultCode === 0) {
                 dispatch(followActionCreator(userId));
             }
 

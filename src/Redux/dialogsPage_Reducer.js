@@ -1,5 +1,4 @@
 const SEND_MESSAGE = "SEND-MESSAGE";
-const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
 
 let initialState = {
     dialogs: [
@@ -15,8 +14,7 @@ let initialState = {
         { id: 3, message: 'XZ' },
         { id: 4, message: 'KYSHAC' },
         { id: 5, message: 'MASKA' },
-    ],
-    newMessageText: "hello my friend"
+    ]
 }
 
 const dialogsPageReducer = (state = initialState, action) => {
@@ -25,29 +23,20 @@ const dialogsPageReducer = (state = initialState, action) => {
         case SEND_MESSAGE: {
             let newMessage = {
                 id: 6,
-                message: state.newMessageText,
+                message: action.newMessageBody,
             }
             return {
                 ...state,
-                messages: [...state.messages, newMessage],
-                newMessageText: ''
+                messages: [...state.messages, newMessage]
             };
             //stateCopy.messages.push(newMessage) - перенесли в let выше немного другим образом (push сегодня не юзается)
             //stateCopy.newMessageText = ''; - перенесли в let выше
-        }
-        case UPDATE_NEW_MESSAGE_TEXT: {
-            return {
-                ...state,
-                newMessageText: action.newText
-            };
-            //stateCopy.newMessageText = action.newText; - перенесли в let выше
         }
         default:
             return state;
     }
 }
 
-export const sendMessageActionCreator = () => ({ type: 'SEND-MESSAGE' })
-export const updateNewMessageTextActionCreator = (text) => ({ type: 'UPDATE-NEW-MESSAGE-TEXT', newText: text })
+export const sendMessageActionCreator = (newMessageBody) => ({ type: 'SEND-MESSAGE', newMessageBody: newMessageBody })
 
 export default dialogsPageReducer;
