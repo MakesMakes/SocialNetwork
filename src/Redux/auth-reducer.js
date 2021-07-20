@@ -1,3 +1,4 @@
+import { stopSubmit } from 'redux-form';
 import { authAPI } from './../api/api';
 
 const SET_USER_DATA = "SET-USER-DATA";
@@ -14,24 +15,46 @@ const authReducer = (state=initialState, action) =>{
         case SET_USER_DATA:
             return{
                 ...state,
-                ...action.data,
-                isAuth: true
+                ...action.data
             }
             default:
                 return state;
     }
 }
 
-export const setAuthUserDataActionCreator = (id, email, login) => ({type: SET_USER_DATA, data: {id, email, login}})
+export const setAuthUserDataActionCreator = (id, email, login, isAuth) => ({type: SET_USER_DATA, data: {id, email, login, isAuth}})
 
 export const authThunkCreator = () =>{
     return (dispatch) =>{
         authAPI.me().then(data =>{
             if (data.resultCode === 0) {
                 let {id, login, email} = data.data;
-                dispatch(setAuthUserDataActionCreator(id, email, login));
+                dispatch(setAuthUserDataActionCreator(id, email, login, true));
             }
         });
+    }
+}
+
+export const loginThunkCreator = (email, password, rememberMe) => {
+    return(dispatch)=>{
+        authAPI.login(email, password, rememberMe).then(data =>{
+            if(data.resultCode === 0) {
+                dispatch(authThunkCreator())
+            } else {
+                let messageError = data.messages.length > 0 ? data.messages[0] : "Some error"
+                dispatch(stopSubmit("login", {_error: messageError}));
+            }
+        })
+    }
+}
+
+export const logoutThunkCreator = () => {
+    return(dispatch)=>{
+        authAPI.logout().then(data =>{
+            if(data.resultCode === 0) {
+                dispatch(setAuthUserDataActionCreator(null, null, null, false))
+            }
+        })
     }
 }
 
