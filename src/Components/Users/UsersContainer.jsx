@@ -8,7 +8,6 @@ import {
 import React from 'react'
 import Users from "./Users"
 import loading from './../../images/loading.gif'
-import { withAuthRedirect } from './../../hoc/withAuthRedirect';
 import { compose } from "redux"
 
 
@@ -93,7 +92,6 @@ export default compose(
         unfollow: unfollowThunkCreator, // это callback а не вызов
         getUsers: getUsersThunkCreator,
         getUsersCurrentPage: getUsersCurrentPageThunkCreator
-    }),
-    withAuthRedirect
+    })
 )(UsersContainer)
 
